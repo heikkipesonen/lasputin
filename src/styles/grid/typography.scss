@@ -1,0 +1,59 @@
+$theme-font: 'Helvetica Neue' !default;
+$theme-font-color: rgb(70, 70, 70) !default;
+$header-sizes: 6 !default;
+$baseFontSize: 30pt !default;
+$fontSizeStep: 4pt !default;
+
+body, html {
+  font-family: $theme-font;
+  font-weight: 300;
+  color: $theme-font-color;
+}
+
+@for $size from 1 to $header-sizes {
+  h#{$size} {
+    color: $theme-font-color;
+    font-weight: 600;
+    font-size: $baseFontSize - $size * $fontSizeStep;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+.text-primary {
+  color: $brand-primary;
+}
+
+.text-secondary {
+  color: $brand-secondary;
+}
+
+.text-small {
+  font-size: 0.8em;
+}
+
+.text-muted {
+  opacity: 0.6;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+.text-light {
+  font-weight: 200;
+}
+
+.text-300 {
+  font-weight: 300;
+}

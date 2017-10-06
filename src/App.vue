@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view></router-view>
+    <transition name="view">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
@@ -11,13 +12,23 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss">
+@import './styles/index';
+$view-transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1) !default;
+
+.view-enter-active, .view-leave-active {
+  transition: $view-transition;
+  transform: translate3d(0, 0, 0);
 }
+
+
+.view-enter {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+}
+
+.view-leave-to {
+  transform: translate3d(-100%, 0, 0);
+}
+
 </style>

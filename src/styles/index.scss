@@ -1,0 +1,9 @@
+$ionicons-font-path: "~ionicons/dist/fonts";
+
+@import './reset';
+@import './variables';
+@import './grid/typography';
+@import './grid/grid';
+@import './grid/helpers';
+@import './components';
+@import '~ionicons/dist/scss/ionicons';

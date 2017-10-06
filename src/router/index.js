@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
+import Main from '@/views/Main'
+import Invoice from '@/views/invoice'
+import InvoiceRow from '@/views/invoice/InvoiceRow'
 
 Vue.use(Router)
 
@@ -8,8 +10,20 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
+      name: 'Main',
+      component: Main
+    },
+    {
+      path: '/invoice',
+      name: 'Invoice',
+      component: Invoice,
+      children: [
+        {
+          path: '/row',
+          name: 'InvoiceRow',
+          component: InvoiceRow
+        }
+      ]
     }
   ]
 })

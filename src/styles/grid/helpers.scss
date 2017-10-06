@@ -1,0 +1,44 @@
+$helper-class-count: 4 !default;
+$helper-base-unit: 1em;
+
+@for $count from 1 to $helper-class-count {
+  .p-#{$count} {
+    padding: $helper-base-unit * $count;
+  }
+
+  .pl-#{$count} {
+    padding-left: $helper-base-unit * $count;
+  }
+
+  .pt-#{$count} {
+    padding-top: $helper-base-unit * $count;
+  }
+
+  .pr-#{$count} {
+    padding-right: $helper-base-unit * $count;
+  }
+
+  .pb-#{$count} {
+    padding-bottom: $helper-base-unit * $count;
+  }
+
+  .m-#{$count} {
+    margin: $helper-base-unit * $count;
+  }
+
+  .mt-#{$count} {
+    margin-top: $helper-base-unit * $count;
+  }
+
+  .ml-#{$count} {
+    margin-left: $helper-base-unit * $count;
+  }
+
+  .mr-#{$count} {
+    margin-right: $helper-base-unit * $count;
+  }
+
+  .mb-#{$count} {
+    margin-bottom: $helper-base-unit * $count;
+  }
+}
