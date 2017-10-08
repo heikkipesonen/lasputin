@@ -1,5 +1,5 @@
 <template lang="html">
-  <button class="control-button" @touchend.prevent.stop="() => $emit('click')" @mouseup.prevent.stop="$emit('click')">
+  <button class="control-button" @click="() => $emit('click')" v-touch-click>
     <i :class="'ion-ios-' + tool"></i>
   </button>
 </template>

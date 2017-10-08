@@ -25,6 +25,16 @@ export default {
     decimals: {
       type: Number,
       default: 2
+    },
+
+    min: {
+      type: [Number, Boolean],
+      default: false
+    },
+
+    max: {
+      type: [Number, Boolean],
+      default: false
     }
   },
 
@@ -41,7 +51,9 @@ export default {
       },
 
       set (value) {
-        this.$emit('input', value)
+        if ((this.min === false || value >= this.min) && (this.max === false || this.value <= this.max)) {
+          this.$emit('input', value)
+        }
       }
     }
   },

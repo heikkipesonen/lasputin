@@ -5,22 +5,26 @@
     </div>
     <h2 class="text-light text-primary mb-1 text-center">{{ viewValue }}</h2>
     <div class="keypad-row" v-for="(row, rowIndex) in keys" :key="rowIndex">
-      <button class="key" v-for="(key, index) in row" :key="index" @touchstart.stop.prevent="() => {}" @touchend.stop.prevent="() => addValue(key)">
+      <button class="key" v-for="(key, index) in row" :key="index"
+        v-touch-click
+        @click="() => addValue(key)">
         {{ key.label }}
       </button>
     </div>
 
-    <i slot="controls" class="ion-ios-close" @touchstart="$emit('close')"></i>
+    <ToolButton slot="controls" tool="close" @click="$emit('close')" />
   </BottomSheet>
 </template>
 
 <script>
 import BottomSheet from '@/components/BottomSheet'
+import ToolButton from '@/components/ToolButton'
 import { decimal } from '@/filters'
 
 export default {
   components: {
-    BottomSheet
+    BottomSheet,
+    ToolButton
   },
 
   props: {

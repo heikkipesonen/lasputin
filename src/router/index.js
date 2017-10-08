@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Main from '@/views/Main'
 import Invoice from '@/views/invoice'
 import InvoiceRow from '@/views/invoice/InvoiceRow'
+import Expenses from '@/views/expenses'
 
 Vue.use(Router)
 
@@ -23,6 +24,13 @@ export default new Router({
           name: 'InvoiceRow',
           component: InvoiceRow
         }
+      ]
+    },
+    {
+      path: '/expenses',
+      name: 'Expenses',
+      component: Expenses,
+      children: [
       ]
     }
   ]

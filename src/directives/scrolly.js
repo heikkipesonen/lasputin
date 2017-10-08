@@ -1,4 +1,3 @@
-import { debounce } from 'lodash'
 import { getPointer } from '@/helpers/pointer'
 
 export default {
@@ -36,25 +35,8 @@ export default {
       direction = false
     }
 
-    const checkScroll = () => {
-      const scroll = container.scrollTop
-      const scrollHeight = container.scrollHeight
-      const offsetHeight = container.offsetHeight
-      const maxScroll = scrollHeight - offsetHeight
-
-      if (scroll === 0) {
-        container.scrollTop = 1
-      } else if (scroll === maxScroll) {
-        container.scrollTop = maxScroll - 1
-      }
-    }
-
-    container.classList.add('scroll-container')
-    container.addEventListener('scroll', debounce(checkScroll, 100))
-    el.addEventListener('touchstart', onStart)
-    el.addEventListener('touchmove', onMove)
-    el.addEventListener('touchend', onEnd)
-
-    checkScroll()
+    container.addEventListener('touchstart', onStart)
+    container.addEventListener('touchmove', onMove)
+    container.addEventListener('touchend', onEnd)
   }
 }

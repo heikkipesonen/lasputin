@@ -1,6 +1,6 @@
 <template lang="html">
-  <NumberInput :label="label" :decimals="decimals" v-model="_inputValue">
-    <TypeSelector v-model="type" :types="types" suffix="vat"></TypeSelector>
+  <NumberInput :min="min" :max="max" :label="label" :decimals="decimals" v-model="_inputValue">
+    <TypeSelector v-model="_vatMode" :types="types" suffix="vat"></TypeSelector>
   </NumberInput>
 </template>
 
@@ -8,6 +8,8 @@
 import NumberInput from '@/components/NumberInput'
 import TypeSelector from '@/components/TypeSelector'
 import { withVat, withoutVat } from '@/helpers/vat'
+
+const types = ['with', 'without']
 
 export default {
   components: {
@@ -32,28 +34,55 @@ export default {
     decimals: {
       type: Number,
       default: 2
+    },
+
+    vat: {
+      type: Boolean,
+      default: false
+    },
+
+    min: {
+      type: [Number, Boolean],
+      default: false
+    },
+
+    max: {
+      type: [Number, Boolean],
+      default: false
     }
   },
 
   data () {
     return {
-      type: 'without',
-      types: ['with', 'without']
+      vatMode: this.vat,
+      types: [...types]
     }
   },
 
   computed: {
+    _vatMode: {
+      get () {
+        return this.vatMode ? 'with' : 'without'
+      },
+
+      set (value) {
+        this.vatMode = value === 'with'
+        this.$emit('changeVat', this.vatMode)
+      }
+    },
     _inputValue: {
       get () {
-        if (this.type === 'with') {
+        if (this.vatMode) {
           return withVat(this.value, this.vatBase)
         }
         return this.value
       },
 
       set (value) {
-        if (this.type === 'with') {
-          value = withoutVat(this.value, this.vatBase)
+        console.log(this.vatMode)
+        console.log(withoutVat(value, this.vatBase))
+        if (this.vatMode) {
+          value = withoutVat(value, this.vatBase)
         }
         this.$emit('input', value)
       }

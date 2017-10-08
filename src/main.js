@@ -15,7 +15,7 @@ import SidePane from '@/components/SidePane'
 import ViewSection from '@/components/ViewSection'
 import TotalDisplay from '@/components/TotalDisplay'
 
-import '@/directives/scrollContainer'
+import '@/directives'
 
 import { money } from '@/filters'
 

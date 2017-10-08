@@ -2,13 +2,11 @@
   <div class="view">
     <div class="view-content-wrapper">
       <div class="view-inner-content" v-scroll-container>
-        <div class="view-title-container">
-          <router-link class="previous-state" :to="{name: previous}" v-if="previous">
-            <h4>{{ previous || "&nbsp;" }}</h4>
-          </router-link>
-          <h4 class="title">{{ title || "&nbsp;" }}</h4>
-          <h4 class="subtitle">{{ subtitle || "&nbsp;"}}</h4>
-        </div>
+        <ViewTitle
+          :previous="previous"
+          :title="title"
+          :subtitle="subtitle" />
+
         <div class="view-content">
           <slot></slot>
         </div>
@@ -23,10 +21,12 @@
 
 <script>
 import ViewToolbar from '@/components/ViewToolbar'
+import ViewTitle from '@/components/ViewTitle'
 
 export default {
   components: {
-    ViewToolbar
+    ViewToolbar,
+    ViewTitle
   },
 
   props: {
@@ -72,20 +72,6 @@ $view-background: white !default;
   }
 }
 
-.view-title-container {
-  padding-top: 2em;
-  padding-bottom: 2em;
-  padding-left: $view-margin;
-  padding-right: $view-margin;
-  text-transform: uppercase;
-  margin-left: -1em;
-  margin-right: -1em;
-
-  h4 {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-  }
-}
 
 .view-content {
   display: flex;
@@ -93,21 +79,6 @@ $view-background: white !default;
   flex: 1 0 auto;
   padding-left: $view-margin;
   padding-right: $view-margin;
-}
-
-.title {
-  color: $brand-primary;
-}
-
-.subtitle {
-  font-size: 0.6em;
-  font-weight: 300;
-  color: $brand-secondary;
-}
-
-.previous-state h4 {
-  font-size: 0.8em;
-  color: desaturate($brand-primary, 50);
 }
 
 .view-toolbar {

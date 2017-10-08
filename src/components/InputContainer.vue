@@ -1,10 +1,8 @@
 <template lang="html">
-  <div class="input-container" :class="{'has-value': hasValue}" @touchstart.stop="" @touchend.stop="">
+  <div class="input-container" :class="{'has-value': hasValue}">
     <input v-if="type === 'text'" type="text" v-model="_inputValue" @focus="$emit('focus')" @blur="$emit('blur')">
     <input v-if="type === 'number'" type="text" readonly :value="_inputValue" @touchend="$emit('focus')">
-    <div class="input-label">
-      {{ label }}
-    </div>
+    <div class="input-label">{{ label }}</div>
     <slot></slot>
   </div>
 </template>

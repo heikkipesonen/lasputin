@@ -2,9 +2,10 @@
 <ViewContainer previous="Main" title="Invoice" subtitle="add new invoice">
 
   <ViewSection label="invoice data" sublabel="Basic invoice information">
-    <InputContainer label="Customer" v-model="model.description"></InputContainer>
-    <InputContainer label="Description" v-model="model.description"></InputContainer>
-    <InputContainer label="Reference" v-model="model.description"></InputContainer>
+    <InputContainer label="Invoice Number" v-model="model.number"></InputContainer>
+    <InputContainer label="Customer" v-model="model.customer"></InputContainer>
+    <InputContainer label="Message" v-model="model.message"></InputContainer>
+    <InputContainer label="Reference" v-model="model.reference"></InputContainer>
   </ViewSection>
   <ViewSection label="invoice rows" sublabel="invoice content rows">
     <ControlButton slot="controls" tool="add" @click="showEditor" />

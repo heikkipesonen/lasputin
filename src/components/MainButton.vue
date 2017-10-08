@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="main-button-wrapper">
-    <button class="main-button" @touchend.stop.prevent="$emit('click')">
+    <button class="main-button" v-touch-click @click="$emit('click')">
       <i :class="'ion-ios-' + tool"></i>
     </button>
   </div>
@@ -20,7 +20,7 @@ export default {
 <style lang="scss" scoped>
 @import '../styles/variables';
 
-$main-button-size: 52px !default;
+$main-button-size: 60px !default;
 
 .main-button-wrapper {
   position: relative;
@@ -39,7 +39,7 @@ $main-button-size: 52px !default;
   background-color: $brand-primary;
   text-align: center;
   color: white;
-  box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.3);
+  box-shadow: 0px 20px 50px -10px fade_out($brand-primary, 0.5);
 
   i {
     display: block;
@@ -50,8 +50,7 @@ $main-button-size: 52px !default;
   }
 
   &:hover, &:active {
-    background-color: lighten($brand-primary, 10);
-    box-shadow: 0px 0px 50px 0px $brand-primary;
+    background-color: lighten($brand-primary, 20);
   }
 }
 </style>

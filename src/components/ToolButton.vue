@@ -1,5 +1,5 @@
 <template lang="html">
-  <button>
+  <button v-touch-click @click="() => $emit('click')">
     <i :class="'ion-ios-' + tool"></i>
   </button>
 </template>
@@ -19,7 +19,7 @@ export default {
 
 $grid-gutter-width: 16px !default;
 $tool-button-size: 32px !default;
-$tool-font-color: rgb(70, 70, 70) !default;
+$tool-font-color: $brand-primary !default;
 $tool-font-active-color: $brand-primary !default;
 $tool-button-shadow-color: $brand-primary !default;
 
@@ -30,7 +30,6 @@ button, button:active, button:focus, button:hover {
 }
 
 button {
-  margin: 0 $grid-gutter-width;
   width: $tool-button-size;
   height: $tool-button-size;
 

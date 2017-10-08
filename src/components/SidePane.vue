@@ -1,19 +1,31 @@
 <template lang="html">
-  <transition name="side-pane">
-    <div class="side-pane" v-if="value" @touchstart.stop.prevent="dragStart" @touchend.stop.prevent="dragEnd" @touchmove.stop.prevent="onDrag" :style="style">
-      <div class="side-pane-content">
-        <div class="side-pane-inner-content">
-          <slot></slot>
+  <div class="side-pane-root">
+    <transition name="side-pane-overlay">
+      <div class="side-pane-overlay" v-if="value" :style="overlayStyle"></div>
+    </transition>
+    <transition name="side-pane">
+      <div class="side-pane" v-if="value" @touchstart.stop="dragStart" @touchend.stop="dragEnd" @touchmove.stop="onDrag" :style="style" v-transfer-dom>
+        <div class="side-pane-content">
+          <div class="side-pane-inner-content" v-scroll-container>
+            <ViewTitle
+            :title="title"
+            :subtitle="subtitle"
+            :previous="previous"
+            />
+            <div class="side-pane-content-wrapper">
+              <slot></slot>
+            </div>
+          </div>
         </div>
+        <div class="controls">
+          <slot name="controls"></slot>
+        </div>
+        <ViewToolbar>
+          <slot name="toolbar"></slot>
+        </ViewToolbar>
       </div>
-      <div class="controls">
-        <slot name="controls"></slot>
-      </div>
-      <ViewToolbar>
-        <slot name="toolbar"></slot>
-      </ViewToolbar>
-    </div>
-  </transition>
+    </transition>
+  </div>
 </template>
 
 <script>
@@ -23,13 +35,25 @@ const SHEET_HIDE_VELOCITY = 0.2
 
 import { getPointer } from '@/helpers/pointer'
 import ViewToolbar from '@/components/ViewToolbar'
+import ViewTitle from '@/components/ViewTitle'
 
 export default {
   components: {
-    ViewToolbar
+    ViewToolbar,
+    ViewTitle
   },
 
   props: {
+    previous: {
+      type: String
+    },
+    title: {
+      type: String
+    },
+    subtitle: {
+      type: String
+    },
+
     value: {
       type: Boolean,
       default: false
@@ -59,6 +83,12 @@ export default {
   },
 
   computed: {
+    overlayStyle () {
+      return {
+        opacity: 1 - this.position.x / 100
+      }
+    },
+
     style () {
       return {
         transform: `translate3d(${this.position.x}%, ${this.position.y}%, 0)`,
@@ -132,6 +162,17 @@ export default {
 @import '../styles/variables';
 $side-pane-transition: cubic-bezier(0.23, 1, 0.32, 1) !default;
 $side-pane-bg: white !default;
+$view-margin: 2em !default;
+
+.side-pane-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: fade_out($brand-primary, 0.7);
+  transition-timing-function: $side-pane-transition;
+}
 
 .side-pane {
   position: fixed;
@@ -139,12 +180,10 @@ $side-pane-bg: white !default;
   bottom: 0;
   right: 0;
   width: 90vw;
-  box-shadow: 0px 0px 50px -10px fade_out($brand-primary, 0.7);
+  box-shadow: 0px 0px 50px -10px fade_out($brand-primary, 0.3);
   background-color: $side-pane-bg;
   display: flex;
   flex-direction: column;
-  padding: 1em;
-  z-index: 200;
   transition-timing-function: $side-pane-transition;
 }
 
@@ -156,7 +195,14 @@ $side-pane-bg: white !default;
 .side-pane-inner-content {
   position: absolute;
   top:0; left: 0; right: 0; bottom: 0;
+  overflow: hidden;
   overflow-y: auto;
+}
+
+.side-pane-content-wrapper {
+  padding-left: $view-margin;
+  padding-right: $view-margin;
+  padding-bottom: 64px;
 }
 
 .side-pane-enter-active, .side-pane-leave-active {
@@ -165,6 +211,13 @@ $side-pane-bg: white !default;
 }
 .side-pane-enter, .side-pane-leave-to /* .fade-leave-active below version 2.1.8 */ {
   transform: translate3d(110%, 0, 0) !important;
+}
+.side-pane-overlay-enter-active, .side-pane-overlay-leave-active {
+  transition: 0.2s;
+  opacity: 1;
+}
+.side-pane-overlay-enter, .side-pane-overlay-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 
 .controls {
@@ -176,5 +229,11 @@ $side-pane-bg: white !default;
   display: flex;
   justify-content: flex-end;
   flex-direction: row;
+}
+
+.view-toolbar {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
 }
 </style>

@@ -1,6 +1,6 @@
 <template lang="html">
   <transition name="bottom-sheet">
-    <div class="bottom-sheet" v-if="value" @touchstart.stop.prevent="dragStart" @touchend.stop.prevent="dragEnd" @touchmove.stop.prevent="onDrag" :style="style">
+    <div class="bottom-sheet" v-transfer-dom v-if="value" @touchstart.stop.prevent="dragStart" @touchend.stop.prevent="dragEnd" @touchmove.stop.prevent="onDrag" :style="style">
       <slot></slot>
       <div class="controls">
         <slot name="controls"></slot>
@@ -130,7 +130,6 @@ $bottom-sheet-bg: white !default;
   display: flex;
   flex-direction: column;
   padding: 1em;
-  z-index: 100;
   transition-timing-function: $bottom-sheet-transition;
 }
 
