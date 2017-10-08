@@ -79,8 +79,6 @@ export default {
       },
 
       set (value) {
-        console.log(this.vatMode)
-        console.log(withoutVat(value, this.vatBase))
         if (this.vatMode) {
           value = withoutVat(value, this.vatBase)
         }

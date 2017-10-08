@@ -1,7 +1,16 @@
 <template lang="html">
   <InputContainer v-model="_inputValue" type="number" :label="label" @focus="showInput" @blur="hideInput" :decimals="decimals">
     <slot></slot>
-    <NumberKeyPad :label="label" v-model="_inputValue" :visible="inputVisible" @close="hideInput" @commit="hideInput" :decimals="decimals"></NumberKeyPad>
+    <NumberKeyPad
+      :label="label"
+      v-model="_inputValue"
+      :visible="inputVisible"
+      @close="hideInput"
+      @commit="hideInput"
+      :decimals="decimals"
+      :max="max"
+      :min="min"
+    />
   </InputContainer>
 </template>
 

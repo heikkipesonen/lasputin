@@ -21,6 +21,8 @@ import BottomSheet from '@/components/BottomSheet'
 import ToolButton from '@/components/ToolButton'
 import { decimal } from '@/filters'
 
+const INPUT_ABS_MAX = 9999999999
+
 export default {
   components: {
     BottomSheet,
@@ -41,9 +43,13 @@ export default {
       type: Number,
       default: 2
     },
-    maxValue: {
-      type: Number,
-      default: 9999999999
+    max: {
+      type: [Number, Boolean],
+      default: INPUT_ABS_MAX
+    },
+    min: {
+      type: [Number, Boolean],
+      default: 0
     }
   },
 
@@ -133,8 +139,10 @@ export default {
 
       set (value) {
         if (value !== null) {
-          const inputValue = Math.round(parseInt(value)) / Math.pow(10, this.decimals)
-          this.$emit('input', inputValue > this.maxValue ? this.value : inputValue)
+          let inputValue = Math.round(parseInt(value)) / Math.pow(10, this.decimals)
+          inputValue = this.max !== false ? inputValue <= this.max ? inputValue : this.max : inputValue
+          inputValue = this.min !== false ? inputValue >= this.min ? inputValue : this.min : inputValue
+          this.$emit('input', inputValue)
         } else {
           this.$emit('input', null)
         }
