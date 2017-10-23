@@ -7,11 +7,21 @@ export default {
     let lastEvent = false
     let direction = false
 
+    let scrollHeight
+    let offsetHeight
+
     const onStart = (evt) => {
       lastEvent = getPointer(evt)
+      scrollHeight = container.scrollHeight
+      offsetHeight = container.offsetHeight
     }
 
     const onMove = (evt) => {
+      if (scrollHeight <= offsetHeight) {
+        evt.preventDefault()
+        return
+      }
+
       if (lastEvent) {
         const pointer = getPointer(evt)
         const dx = pointer.x - lastEvent.x

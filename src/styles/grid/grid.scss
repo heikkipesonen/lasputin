@@ -8,8 +8,6 @@ $breakpoints: (
   xl: 1440px
 ) !default;
 
-$sizes: map-keys($breakpoints);
-
 .container-fill {
   flex: 1 0 auto;
 }
@@ -57,6 +55,22 @@ $sizes: map-keys($breakpoints);
   margin-right: -$grid-gutter-width / 2;
   display: flex;
   flex-direction: row;
+}
+
+$sizes: map-keys($breakpoints);
+
+$column-width: 100% / $column-count;
+[class*="col-"], [class*=" col-"] {
+  padding-left: $grid-gutter-width / 2;
+  padding-right: $grid-gutter-width / 2;
+  display: flex;
+  flex-direction: column;
+}
+
+@for $column from 1 to $column-count + 1 {
+  .col-#{$column} {
+    width: $column-width * $column;
+  }
 }
 
 @each $size in $sizes {

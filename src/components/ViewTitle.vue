@@ -3,7 +3,7 @@
     <router-link class="previous-state" :to="{name: previous}" v-if="previous">
       <h4>{{ previous || "&nbsp;" }}</h4>
     </router-link>
-    <h4 class="title">{{ title || "&nbsp;" }}</h4>
+    <h2 class="title">{{ title || "&nbsp;" }}</h2>
     <h4 class="subtitle">{{ subtitle || "&nbsp;"}}</h4>
   </div>
 </template>
@@ -46,7 +46,7 @@ $view-margin: 2em !default;
 
 
 .title {
-  color: $brand-primary;
+  color: $title-text;
 }
 
 .subtitle {

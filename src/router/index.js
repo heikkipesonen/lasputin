@@ -4,6 +4,7 @@ import Main from '@/views/Main'
 import Invoice from '@/views/invoice'
 import InvoiceRow from '@/views/invoice/InvoiceRow'
 import Expenses from '@/views/expenses'
+import Travel from '@/views/travel'
 
 Vue.use(Router)
 
@@ -30,6 +31,13 @@ export default new Router({
       path: '/expenses',
       name: 'Expenses',
       component: Expenses,
+      children: [
+      ]
+    },
+    {
+      path: '/travel',
+      name: 'Travel',
+      component: Travel,
       children: [
       ]
     }

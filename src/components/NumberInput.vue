@@ -1,5 +1,5 @@
 <template lang="html">
-  <InputContainer v-model="_inputValue" type="number" :label="label" @focus="showInput" @blur="hideInput" :decimals="decimals">
+  <InputContainer v-model="_inputValue" type="number" :label="label" @focus="showInput" @blur="hideInput" :decimals="decimals" :suffix="unit">
     <slot></slot>
     <NumberKeyPad
       :label="label"
@@ -34,6 +34,11 @@ export default {
     decimals: {
       type: Number,
       default: 2
+    },
+
+    unit: {
+      type: String,
+      default: null
     },
 
     min: {
